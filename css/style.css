@@ -1,96 +1,188 @@
-/*font*/
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 
-/*reset styles*/
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-a{
-  text-decoration: none;
-}
-button, input{
   outline: none;
   border: none;
+  scroll-behavior: smooth;
 }
-ul{
-  list-style: none;
-}
-/*global*/
-body{
-  line-height: 1.6;
-  font-family: 'Roboto';
-  color: #fff;
-}
-.btn{
-  display: inline-block;
-  padding: 15px 20px;
-  text-transform: uppercase;
-  background-color: #ff8601;
-  color: #fff;
-  width: 200px;
-  cursor: pointer;
-}
-/*header*/
 
-.header{
+body {
+  color: white;
+  font-family: 'Open Sans';
+  line-height: 2;
+}
+
+.flex {
+  display: flex;
+}
+
+.container,
+.header-container,
+.introText,
+.form-container,
+.form-group2 {
+  flex-direction: column;
+}
+
+.header-container,
+.form-container {
   min-height: 100vh;
-  background-image: url('/assets/pozadina.jpg');
+}
+
+.header-container {
+  background-image: url("./assets/background.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  /**/
 }
 
-/*nav*/
+.text-image {
+  flex-direction: column;
+  width: 100%;
+}
 
-.nav{
-  height: 60px;
+/* hamburger menu  */
+.hide {
+  display: none;
+}
+
+.show {
   display: flex;
-  align-items: center;
+}
+
+.menu {
+  min-width: 10vw;
+  max-width: 20vw;
+  height: 10vh;
+  position: absolute;
+  top: 3px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.line {
+  width: 40px;
+  height: 4px;
+  background-color: white;
+  margin-top: 10px;
+  transition: 0.5s;
+}
+
+.line.transformMenu:first-of-type {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.line.transformMenu:nth-of-type(2) {
+  transform: rotate(-45deg);
+}
+
+.line.transformMenu:nth-of-type(3) {
+  
+  opacity: 0;
+}
+/* burger end */
+
+nav {
   justify-content: space-between;
+  height: 60px;
+  align-items: center;
   padding: 0 20px;
 }
-.nav .logo img {
-  height: 20px;
+
+.logo img, .phoneImg img{
   display: block;
+}
+.phoneImg img {
+  margin: 0 auto;
 }
 
-.nav ul {
-  display: flex;
+ul {
+  list-style-type: none;
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: rgba(21, 41, 190, 0.945);
 }
-.nav ul li a{
-  color: #fff;
-  padding: 10px 15px;
+
+li {
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  border-bottom: 1px rgb(83, 81, 81) solid;
 }
-/*main header section*/
-.header-main{
-  min-height: calc(100vh - 60px);
-  display: flex;
-  align-items: center;
-  padding: 0px 10%;
+
+a {
+  text-decoration: none;
+  color: white;
 }
-.text-content{
-  width: 50%;
-  margin-right: 10%;
+
+li a, 
+.arrow {
+  transition: all ease 0.3s;
 }
-.text-content h3{
+
+.phoneImg,
+.introText {
+  width: 100%;
+}
+
+.introText {
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10%;
+}
+
+.introText h3 {
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
-.text-content img{
-  height: 50px;
-  display: block;
-  margin-bottom: 10px;
+
+.introText div,
+.introText p:first-child {
+  margin-bottom: 20px;
 }
-.text-content p:last-of-type{
-  margin-bottom: 40px;
+
+button {
+  display: inline-block;
+  padding: 15px 20px;
+  color: #fff;
+  background-color: rgb(255, 127, 39);
+  margin-top: 20px;
+  font-size: 1.1em;
+  text-shadow: 1px 1px 2px #686565;
+  transition: all ease 0.3s;
 }
-.tablet-image{
-  width: 50%;
+
+.phoneImg {
+  align-items: center;
+  animation-name: fadein;
+  animation-duration: 4s;
 }
-.tablet-image img{
-  width: 100%;
-  display: block;
+
+.phoneImg img,
+.introText img {
+  max-width: 100%;
+}
+
+.arrow {
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  font-size: 30px;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  cursor: pointer;
 }
 
 /*form section*/
@@ -163,9 +255,21 @@ body{
 .form-group .input-wrapper i {
   margin-right: 5px;
 }
-.form-group .input-wrapper input{
+.form-group .input-wrapper input[type = 'text']{
   width: 100%;
   padding-right: 100px;
+}
+.form-group .input-wrapper input[type = 'date']{
+  width: 100%;
+}
+.input-wrapper label{
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+.input-wrapper input[type='date']:focus + label{
+  display: none;
 }
 .sub-group{
   width: 48%;
@@ -193,27 +297,118 @@ body{
   padding: 15px;
   color: #fff;
 }
-.form-btn{
-  margin-top: 30px;
+
+li a:hover {
+  color: gray;
+  text-shadow: 1px 1px 2px #2e2d2d;
 }
 
-/*media queries*/
+.arrow a:hover {
+  color: rgb(255, 127, 39);
+}
 
-@media(max-width: 768px){
-  .header-main{
+button:hover {
+  background-color: transparent;
+  color: rgb(255, 127, 39);
+  outline: 1px solid rgb(255, 127, 39);
+  box-shadow: 2px 1px 5px 3px rgba(153, 154, 163, 0.767);
+  cursor: pointer;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+
+  .menu {
+    display: none;
+  }
+
+  ul {
+    position: relative;
+    background: transparent;
+    top: 0;
+    right: 0;
+    flex-direction: row;
+    width: auto;
+  }
+
+  li {
+    border: none;
+    width: auto;
+    margin: 0 1em;
+  }
+
+  .text-image {
+    flex-direction: row;
+    height: calc(100vh - 100px);
+  }
+
+  .phoneImg,
+  .introText {
+    width: 50vw;
+    min-height: calc(100vh - 100px);
+  }
+
+  .introText {
+    padding: 0 10%;
+  }
+
+  .phoneImg {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 600px){
+  .form-group,.sub-group,.input-wrapper{
     display: block;
-  }
-  .header-main .text-content{
+    margin: 1em auto;
     width: 100%;
-    text-align: center;
   }
-  .text-content img{
-    display: inline-block;
+  
+  .input-wrapper input{
+    width: 100%;
   }
-  .tablet-image{
-    width: 70%;
-    margin: auto;
-    padding: 20px 0;
+  .form-group input, .form-group textarea{
+    width: 100%;
+  }
+  input[type='email']{
+    margin-bottom: 1em;
   }
 }
+/*removing placeholder from input type date*/
 
+input[type=date]::-webkit-datetime-edit {
+  color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+  color: #fff;
+}
+
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
+    -webkit-appearance: none;
+}
+
+input[type = 'date']{
+  cursor: pointer;
+}
