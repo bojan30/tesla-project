@@ -287,6 +287,24 @@ button {
 .form-group input::placeholder ,.form-group textarea::placeholder {
   color: #fff;
 }
+/*removing placeholder from input type date*/
+
+input[type=date]::-webkit-datetime-edit {
+  color: transparent;
+}
+input[type=date]:focus::-webkit-datetime-edit {
+  color: #fff;
+}
+
+input[type="date"]::-webkit-inner-spin-button{
+    display: none;
+    -webkit-appearance: none;
+}
+
+input[type = 'date']{
+  cursor: pointer;
+}
+
 .form-group .sub-group input, .form-group .sub-group textarea{
   width: 100%;
 }
@@ -394,21 +412,4 @@ button:hover {
   input[type='email']{
     margin-bottom: 1em;
   }
-}
-/*removing placeholder from input type date*/
-
-input[type=date]::-webkit-datetime-edit {
-  color: transparent;
-}
-input[type=date]:focus::-webkit-datetime-edit {
-  color: #fff;
-}
-
-input[type="date"]::-webkit-inner-spin-button{
-    display: none;
-    -webkit-appearance: none;
-}
-
-input[type = 'date']{
-  cursor: pointer;
 }
