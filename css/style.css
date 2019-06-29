@@ -11,7 +11,7 @@
 
 body {
   color: white;
-  font-family: 'Open Sans';
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   line-height: 2;
 }
 
@@ -19,16 +19,22 @@ body {
   display: flex;
 }
 
-.container,
-.header-container,
-.introText,
-.form-container,
-.form-group2 {
+.column {
   flex-direction: column;
 }
 
-.header-container,
-.form-container {
+.white {
+  color: #fff;
+}
+
+.center {
+  align-items: center;
+}
+
+.text-image,
+.form-section,
+.products,
+.form-section {
   min-height: 100vh;
 }
 
@@ -39,11 +45,17 @@ body {
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
-  /**/
 }
 
-.text-image {
-  flex-direction: column;
+.text-image,
+.products,
+.phoneImg,
+.introText,
+.form-section form,
+.form-group .input-wrapper input[type = 'text'],
+.form-group .input-wrapper input[type = 'date'],
+.form-group .sub-group input,
+.form-group .sub-group textarea  {
   width: 100%;
 }
 
@@ -56,6 +68,16 @@ body {
   display: flex;
 }
 
+.menu,
+.arrow,
+.help,
+input[type = 'date'],
+button,
+.phone-link,
+.icons div {
+  cursor: pointer;
+}
+
 .menu {
   min-width: 10vw;
   max-width: 20vw;
@@ -63,7 +85,6 @@ body {
   position: absolute;
   top: 3px;
   right: 20px;
-  cursor: pointer;
 }
 
 .line {
@@ -83,7 +104,6 @@ body {
 }
 
 .line.transformMenu:nth-of-type(3) {
-  
   opacity: 0;
 }
 /* burger end */
@@ -91,14 +111,19 @@ body {
 nav {
   justify-content: space-between;
   height: 60px;
-  align-items: center;
   padding: 0 20px;
 }
 
-.logo img, .phoneImg img{
+.logo img,
+.phoneImg img,
+.help:hover + .tooltip,
+.phone-content img,
+.img img {
   display: block;
 }
-.phoneImg img {
+
+.phoneImg img,
+.phone-content .text p {
   margin: 0 auto;
 }
 
@@ -121,17 +146,12 @@ li {
 
 a {
   text-decoration: none;
-  color: white;
 }
 
 li a, 
-.arrow {
+.arrow,
+.icons i {
   transition: all ease 0.3s;
-}
-
-.phoneImg,
-.introText {
-  width: 100%;
 }
 
 .introText {
@@ -150,10 +170,10 @@ li a,
   margin-bottom: 20px;
 }
 
-button {
+button,
+.phone-link {
   display: inline-block;
-  padding: 15px 20px;
-  color: #fff;
+  padding: 12px 20px;
   background-color: rgb(255, 127, 39);
   margin-top: 20px;
   font-size: 1.1em;
@@ -162,13 +182,14 @@ button {
 }
 
 .phoneImg {
-  align-items: center;
   animation-name: fadein;
   animation-duration: 4s;
 }
 
 .phoneImg img,
-.introText img {
+.introText img,
+.phone-content img,
+.img img {
   max-width: 100%;
 }
 
@@ -182,19 +203,14 @@ button {
   animation-name: blink;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-  cursor: pointer;
 }
 
 /*form section*/
 
-.form-section{
+.form-section {
   background-color: #000139;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 0 10%;
+  padding: 5% 10%;
 }
 .form-section .underline{
   width: 100px;
@@ -207,41 +223,36 @@ button {
   text-transform: uppercase;
 }
 .form-section form{
-  width: 100%;
   text-align: center;
 }
 .form-group{
-  display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
+
 .input-wrapper{
+  display: flex;
   width: 48%;
   position: relative;
-  display: flex;
 }
+
 .help{
   position: absolute;
   top: 50%;
   right: 10px;
   transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  cursor: pointer;
 }
-.help:hover + .tooltip {
-  display: block;
-}
+
 .tooltip{
   position: absolute;
   top: 130%;
   right: 0px;
   background-color: #4d4e8e;
   width: 200px;
-  color: #fff;
   padding: 10px;
   display: none;
 }
+
 .tooltip:after{
   position: absolute;
   top: -8px;
@@ -252,29 +263,43 @@ button {
   height: 20px;
   transform: rotate(45deg);
 }
+
 .form-group .input-wrapper i {
   margin-right: 5px;
 }
+
 .form-group .input-wrapper input[type = 'text']{
-  width: 100%;
   padding-right: 100px;
 }
-.form-group .input-wrapper input[type = 'date']{
-  width: 100%;
-}
+
 .input-wrapper label{
   position: absolute;
   top: 50%;
   left: 15px;
   transform: translateY(-50%);
 }
+
 .input-wrapper input[type='date']:focus + label{
   display: none;
 }
+
+/*removing placeholder from input type date*/
+
+input[type=date]::-webkit-datetime-edit{
+  color: transparent;
+}
+
+input[type=date]:focus::-webkit-datetime-edit {
+  color: #fff;
+}
+
+input[type="date"]::-webkit-inner-spin-button{
+  display: none;
+  -webkit-appearance: none;
+}
+
 .sub-group{
   width: 48%;
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
 }
@@ -282,38 +307,60 @@ button {
   width: 48%;
   padding: 15px;
   background-color: #00025e;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
   color: #fff;
-}
-.form-group input::placeholder ,.form-group textarea::placeholder {
-  color: #fff;
-}
-/*removing placeholder from input type date*/
-
-input[type=date]::-webkit-datetime-edit {
-  color: transparent;
-}
-input[type=date]:focus::-webkit-datetime-edit {
-  color: #fff;
+  font-size: 1rem;
+  font-family: 'Open Sans';
 }
 
-input[type="date"]::-webkit-inner-spin-button{
-    display: none;
-    -webkit-appearance: none;
-}
-
-input[type = 'date']{
-  cursor: pointer;
-}
-
-.form-group .sub-group input, .form-group .sub-group textarea{
-  width: 100%;
-}
 .form-group .sub-group textarea{
   background-color: #00025e;
   outline: none;
   border: none;
   padding: 15px;
   color: #fff;
+}
+
+/* products div */
+
+.products {
+  background-color: #333;
+  justify-content: center;
+}
+
+.phone-content {
+  min-width: 95vw;
+  overflow: hidden;
+  padding: 4% 0;
+}
+
+.phone-content .img,
+.phone-content .text {
+  min-width: 90vw;
+  animation-name: fadein;
+  animation-duration: 1s;
+  padding: 1em;
+  text-align: center;
+}
+
+.phone-content img,
+.img img {
+  max-height: 350px;
+  margin: 0.2em auto;
+  padding: 1em;
+}
+
+.icons {
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.icons div {
+  padding: 0.5em;
+  margin: 0.5em;
 }
 
 li a:hover {
@@ -325,12 +372,27 @@ li a:hover {
   color: rgb(255, 127, 39);
 }
 
-button:hover {
+button:hover,
+.phone-link:hover,
+.icons div:hover,
+.activeIcon {
+  box-shadow: 2px 1px 5px 3px rgba(153, 154, 163, 0.767);
+}
+
+button:hover,
+.phone-link:hover {
   background-color: transparent;
   color: rgb(255, 127, 39);
   outline: 1px solid rgb(255, 127, 39);
-  box-shadow: 2px 1px 5px 3px rgba(153, 154, 163, 0.767);
-  cursor: pointer;
+}
+
+.icons div:hover {
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+
+.activeIcon {
+  border: 1px inset lightgray;
 }
 
 @keyframes blink {
@@ -378,13 +440,13 @@ button:hover {
 
   .text-image {
     flex-direction: row;
-    height: calc(100vh - 100px);
+    min-height: calc(100vh - 100px);
   }
 
   .phoneImg,
   .introText {
     width: 50vw;
-    min-height: calc(100vh - 100px);
+    min-height: calc(100vh - 60px);
   }
 
   .introText {
@@ -394,22 +456,31 @@ button:hover {
   .phoneImg {
     justify-content: flex-start;
   }
+  
+  .phone-content .text p {
+    width: 60%;
+  }
 }
 
 @media (max-width: 600px){
   .form-group,.sub-group,.input-wrapper{
     display: block;
     margin: 1em auto;
-    width: 100%;
   }
   
-  .input-wrapper input{
+  .form-group,.sub-group,
+  .input-wrapper,
+  .input-wrapper input,
+  .form-group input,
+  .form-group textarea{
     width: 100%;
   }
-  .form-group input, .form-group textarea{
-    width: 100%;
-  }
+
   input[type='email']{
     margin-bottom: 1em;
+  }
+
+  .phone-content .text p {
+    width: 80%;
   }
 }
